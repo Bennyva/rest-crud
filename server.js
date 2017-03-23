@@ -20,7 +20,9 @@ REST.prototype.connectMysql = function() {
         password : 'password',
         database : 'restful_api_demo',
         debug    :  false
+
     });
+    console.log("Database Connection established");
     pool.getConnection(function(err,connection){
         if(err) {
           self.stop(err);
