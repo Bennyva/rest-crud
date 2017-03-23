@@ -20,7 +20,9 @@ REST.prototype.connectMysql = function() {
         password : '',
         database : 'test',
         debug    :  false
+
     });
+    console.log("Database Connection established");
     pool.getConnection(function(err,connection){
         if(err) {
           self.stop(err);
