@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<title>Simple login</title>
+
+   <body>
+      
+      <form action = "http://127.0.0.1:3000/api/questions/add" method = "POST">
+         <fieldset>
+            <label for="questionID">questionID:</label>
+            <input type="text" id="questionID" name="questionID" placeholder="Enter your questionID" />
+            <br />
+            <label for="categoryID">categoryID:</label>
+            <input type="text" id="categoryID" name="categoryID" placeholder="Enter your categoryID" />
+            <br />
+            <label for="questionText">questionText:</label>
+            <input type="text" id="questionText" name="questionText" placeholder="Enter your questionText" />
+            <br />
+            <label for="questionTypeID">questionTypeID:</label>
+            <textarea id="questionTypeID" name="questionTypeID" placeholder="Enter a questionTypeID"></textarea>
+            <br />
+            <input type="submit" value="Submit" />
+         </fieldset>
+      </form>
+      
+   </body>
+</html>

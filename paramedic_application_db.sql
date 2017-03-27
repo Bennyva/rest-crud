@@ -422,8 +422,10 @@ SELECT * FROM QUESTIONS WHERE category_id =1;
 -- this function selects random top number in the limit function
 SELECT * FROM QUESTIONS WHERE category_id = 1
 ORDER BY RAND()
-LIMIT 2
+LIMIT 2;
 
+INSERT INTO questions (question_id, category_id, question_text, question_type_id)
+VALUES (99, 1, "colons", 1);
 
 
 

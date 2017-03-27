@@ -102,6 +102,8 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     });
 
     router.get("/answers",function(req,res){
+
+    	res.send('./views/answers');
         var query = "SELECT * FROM ??";
         var table = ["answers"];
         query = mysql.format(query,table);
@@ -139,6 +141,28 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
             }
         });
     });
+
+    router.post("/questions/add",function(req,res){
+        /*res.sendfile("loginSent.html");*/
+        var query = "INSERT INTO ??(??,??,??,??) VALUES (?,?,?,?)";
+        var table = ["questions","question_id","category_id", "question_text", "question_type_id" ,req.body.questionID,req.body.categoryID, req.body.questionText, req.body.questionTypeID];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+            } else {
+            	console.log(req.body);
+                res.json({"Error" : false, "Message" : "Question Added !", "New Question " : rows});
+            }
+        });
+    });
+
+	router.post("/process_questions",function(req,res){
+	        res.render('loginSent.html', {name: req.body.questionID});
+	        console.log("wow");
+	    });
+
+
 	
 }
 

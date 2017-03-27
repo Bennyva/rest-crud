@@ -1,10 +1,25 @@
 var express = require("express");
 var mysql   = require("mysql");
 var bodyParser  = require("body-parser");
+/*var formidable = require("formidable");*/
 var md5 = require('MD5');
+
+var routes = require('./routes');
+var http = require('http');
+var path = require('path');
+
+//load questions routes
+var questions = require('./routes/questions');
+
 
 var rest = require("./REST.js");
 var app  = express();
+
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'rest-crud')));
+
 
 function REST(){
     var self = this;
@@ -42,8 +57,8 @@ REST.prototype.configureExpress = function(connection) {
 }
 
 REST.prototype.startServer = function() {
-      app.listen(3000,function(){
-          console.log("All right ! I am alive at Port 3000.");
+      http.createServer(app).listen(app.get('port'), function(){
+          console.log("All right ! I am alive at Port " + app.get('port'));
       });
 }
 
@@ -53,6 +68,16 @@ REST.prototype.stop = function(err) {
 }
 
 new REST();
+
+
+
+  app.get('/', function (req, res) {
+     res.sendfile("login.html" );
+  });
+
+  app.get('/newQuestion', function (req, res) {
+     res.sendfile("loginSent.html" );
+  });
 
 
 
