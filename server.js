@@ -18,7 +18,7 @@ REST.prototype.connectMysql = function() {
         host     : 'localhost',
         user     : 'root',
         password : 'password',
-        database : 'restful_api_demo',
+        database : 'paramedic_application_db',
         debug    :  false
     });
     pool.getConnection(function(err,connection){
@@ -26,6 +26,7 @@ REST.prototype.connectMysql = function() {
           self.stop(err);
         } else {
           self.configureExpress(connection);
+          console.log("Database connected...")
         }
     });
 }

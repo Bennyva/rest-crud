@@ -6,11 +6,11 @@ function REST_ROUTER(router,connection,md5) {
 
 REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
-    router.get("/",function(req,res){
-        res.json({"Message" : "Hello World sss!"});
-    })
-}
-    router.post("/users",function(req,res){
+	    router.get("/",function(req,res){
+	        res.json({"Message" : "Hello World sss!"});
+	    })
+	}
+    /*router.post("/users",function(req,res){
         var query = "INSERT INTO ??(??,??) VALUES (?,?)";
         var table = ["user_login","user_email","user_password",req.body.email,md5(req.body.password)];
         query = mysql.format(query,table);
@@ -71,6 +71,71 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
             } else {
                 res.json({"Error" : false, "Message" : "Deleted the user with email "+req.params.email});
+            }
+        });
+    });*/
+
+    router.get("/categories",function(req,res){
+        var query = "SELECT * FROM ??";
+        var table = ["categories"];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Successes", "Categories" : rows});
+            }
+        });
+    });
+
+    router.get("/questions",function(req,res){
+        var query = "SELECT * FROM ??";
+        var table = ["questions"];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Successes", "Questions" : rows});
+            }
+        });
+    });
+
+    router.get("/answers",function(req,res){
+        var query = "SELECT * FROM ??";
+        var table = ["answers"];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Successes", "Answers" : rows});
+            }
+        });
+    });
+
+    router.get("/questions/:category_id",function(req,res){
+        var query = "SELECT * FROM ?? WHERE ??=?";
+        var table = ["questions","category_id",req.params.category_id];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Success", "QuestionsPerCategoryID" : rows});
+            }
+        });
+    });
+
+    router.get("/answers/:category_id",function(req,res){
+        var query = "SELECT * FROM ?? WHERE ??=?";
+        var table = ["answers","category_id",req.params.category_id];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Success", "AnswersPerCategoryID" : rows});
             }
         });
     });
