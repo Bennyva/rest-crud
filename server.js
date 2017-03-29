@@ -7,6 +7,7 @@ var md5 = require('MD5');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var morgan = require('morgan')
 
 //load questions routes
 var questions = require('./routes/questions');
@@ -17,7 +18,7 @@ var app  = express();
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'rest-crud')));
 
 
@@ -50,6 +51,7 @@ REST.prototype.configureExpress = function(connection) {
       var self = this;
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(bodyParser.json());
+      app.use(morgan('common'));
       var router = express.Router();
       app.use('/api', router);
       var rest_router = new rest(router,connection,md5);

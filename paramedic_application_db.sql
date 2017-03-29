@@ -428,11 +428,17 @@ INSERT INTO questions (question_id, category_id, question_text, question_type_id
 VALUES (99, 1, "colons", 1);
 
 
+INSERT INTO answers VALUES (109, 99, 1, "yes", 1);
+INSERT INTO answers VALUES (110, 99, 0, "only once a week", 1);
+INSERT INTO answers VALUES (111, 99, 0, "sometimes", 1);
+INSERT INTO answers VALUES (112, 99, 0, "no", 1);
+INSERT INTO answers VALUES (113, 99, 0, "maybe", 1);
 
 
+-- INSERT INTO users VALUES (2, "aragallex@gmail.com", '2013-08-05 18:19:03', 2, 'Ben', 'v');
+SELECT * FROM users;
 
-
-
+-- UPDATE users SET last_log_in = '2016-08-05 18:19:03', log_in_count = 6 WHERE user_email = 'aragallex@gmail.com';
 
 
 

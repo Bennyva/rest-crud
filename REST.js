@@ -102,8 +102,6 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     });
 
     router.get("/answers",function(req,res){
-
-    	res.send('./views/answers');
         var query = "SELECT * FROM ??";
         var table = ["answers"];
         query = mysql.format(query,table);
@@ -114,6 +112,8 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
                 res.json({"Error" : false, "Message" : "Successes", "Answers" : rows});
             }
         });
+
+
     });
 
     router.get("/questions/:category_id",function(req,res){
@@ -144,8 +144,8 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 
     router.post("/questions/add",function(req,res){
         /*res.sendfile("loginSent.html");*/
-        var query = "INSERT INTO ??(??,??,??,??) VALUES (?,?,?,?)";
-        var table = ["questions","question_id","category_id", "question_text", "question_type_id" ,req.body.questionID,req.body.categoryID, req.body.questionText, req.body.questionTypeID];
+        var query = "INSERT INTO ??(??,??,??) VALUES (?,?,?)";
+        var table = ["questions","category_id", "question_text", "question_type_id" ,req.body.categoryID, req.body.questionText, req.body.questionTypeID];
         query = mysql.format(query,table);
         connection.query(query,function(err,rows){
             if(err) {
@@ -161,6 +161,48 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 	        res.render('loginSent.html', {name: req.body.questionID});
 	        console.log("wow");
 	    });
+
+
+    router.get("/users",function(req,res){
+        var query = "SELECT * FROM ??";
+        var table = ["users"];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Successes", "Users" : rows});
+            }
+        });
+    });
+
+    router.post("/users", function(req,res){
+        var query = "INSERT INTO ??(??,??,??,??,??) VALUES (?,?,?,?,?)";
+        var table = ["users","user_email", "last_log_in", "log_in_count", "user_first_name", "user_last_name" ,req.body.userEmail, req.body.lastLogIn, req.body.logInCount, req.body.userFirstName, req.body.userLastName];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+            } else {
+                console.log(req.body);
+                res.json({"Error" : false, "Message" : "User Added !", "New User " : rows});
+            }
+        });
+    });
+
+    router.put("/users",function(req,res){
+        var query = "UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?";
+        var table = ["users","last_log_in",req.body.lastLogIn,"log_in_count",req.body.logInCount, "user_email", req.body.userEmail];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Updated the user "+req.body.userEmail});
+            }
+        });
+    });
+    
 
 
 	
