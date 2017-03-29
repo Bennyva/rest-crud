@@ -51,6 +51,7 @@ DROP TABLE IF EXISTS `categories`;
  CREATE TABLE `categories` (
 	`category_id` int(255) NOT NULL AUTO_INCREMENT,
 	`category_name` varchar(255) NOT NULL,
+    `category_desc` varchar(255) NOT NULL,
       
 	PRIMARY KEY (`category_id`)
    
@@ -59,9 +60,9 @@ DROP TABLE IF EXISTS `categories`;
 -- Populate categories
 --
 
-INSERT INTO `categories` (`category_id`, `category_name`) VALUES (1, 'Cardiovascular');
-INSERT INTO `categories` (`category_id`, `category_name`) VALUES (2, 'Drugs');
-INSERT INTO `categories` (`category_id`, `category_name`) VALUES (3, 'Electrocardiogram');
+INSERT INTO `categories` (`category_id`, `category_name`, `category_desc`) VALUES (1, 'Cardiovascular', 'Questions relating to, or involving the heart and blood vessels.');
+INSERT INTO `categories` (`category_id`, `category_name`, `category_desc`) VALUES (2, 'Drugs', 'Questions on medicines sold directly without a prescription OR pharmaceutical drugs.');
+INSERT INTO `categories` (`category_id`, `category_name`, `category_desc`) VALUES (3, 'Electrocardiogram', 'Questions on recordings or descriptions of a person\'s heartbeat produced by electrocardiography');
 
 --
 -- Table structure for table `results`
@@ -74,7 +75,7 @@ CREATE TABLE `results` (
 	`user_id` int(255) NOT NULL,
 	
 	`category_id` int(255) NOT NULL,
-	`totalLength` int(255) NOT NULL,
+	`total_length` int(255) NOT NULL,
 	`date_written` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 
 	PRIMARY KEY (`result_id`),
@@ -85,7 +86,7 @@ CREATE TABLE `results` (
 -- Populate results
 -- 
  
-INSERT INTO `results` (`result_id`, `result_score`, `user_id`, `category_id`, `totalLength`, `date_written`) VALUES (1, 75, 1, 2, 100, '2013-08-05 18:28:52');
+INSERT INTO `results` (`result_id`, `result_score`, `user_id`, `category_id`, `total_length`, `date_written`) VALUES (1, 75, 1, 2, 100, '2013-08-05 18:28:52');
 
 --
 -- Table structure for table `questions`
@@ -408,7 +409,7 @@ SELECT * FROM QUESTION_TYPES;
 
 -- gets user name and test score
 SELECT 
-CONCAT(result_score, '/', totalLength) AS 'Score', 
+CONCAT(result_score, '/', total_length) AS 'Score', 
 CONCAT(user_first_name, ' ', user_last_name) AS 'Name' 
 FROM RESULTS 
 INNER JOIN USERS 
@@ -440,8 +441,8 @@ SELECT * FROM users;
 
 -- UPDATE users SET last_log_in = '2016-08-05 18:19:03', log_in_count = 6 WHERE user_email = 'aragallex@gmail.com';
 
-
-
+INSERT INTO results VALUES (3, 99, 1, 1, 100, '2014-08-05 18:28:52');
+select * from results;
 
 
 

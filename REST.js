@@ -198,11 +198,25 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
             } else {
+                console.log(req.body);
                 res.json({"Error" : false, "Message" : "Updated the user "+req.body.userEmail});
             }
         });
     });
     
+    router.post("/results", function(req,res){
+        var query = "INSERT INTO ??(??,??,??,??,??) VALUES (?,?,?,?,?)";
+        var table = ["results","result_score", "user_id", "category_id", "total_length", "date_written" ,req.body.resultScore, req.body.userID, req.body.categoryID, req.body.totalLength, req.body.dateWritten];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+            } else {
+                console.log(req.body);
+                res.json({"Error" : false, "Message" : "Result Added !", "New Result " : rows});
+            }
+        });
+    });
 
 
 	
