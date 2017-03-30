@@ -220,8 +220,8 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 
 
     router.get("/results/:category_id",function(req,res){
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["results","category_id",req.params.category_id];
+        var query = "SELECT * FROM ?? WHERE ??=? ORDER BY ?? DESC" ;
+        var table = ["results","category_id",req.params.category_id, "result_id"];
         query = mysql.format(query,table);
         connection.query(query,function(err,rows){
             if(err) {
@@ -232,7 +232,20 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         });
     });
 
+    router.get("/results/:category_id/:user_id",function(req,res){
+        var query = "SELECT * FROM ?? WHERE ??=? AND ??=? ORDER BY ?? DESC";
+        var table = ["results","category_id",req.params.category_id, "user_id",req.params.user_id, "result_id"];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Success", "ResultsPerCategory" : rows});
+            }
+        });
+    });
 
+//add per user id next
 	
 }
 
