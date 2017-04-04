@@ -30,11 +30,11 @@ function REST(){
 REST.prototype.connectMysql = function() {
     var self = this;
     var pool      =    mysql.createPool({
-        connectionLimit : 100,
-        host     : 'localhost',
-        user     : 'root',
-        password : 'password',
-        database : 'paramedic_application_db',
+        connectionLimit : 4,
+        host     : 'us-cdbr-iron-east-03.cleardb.net',
+        user     : 'babb6506ac0300',
+        password : '43e78c2c',
+        database : 'ad_419fe52b976709d',
         debug    :  false
     });
     pool.getConnection(function(err,connection){

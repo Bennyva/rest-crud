@@ -1,11 +1,9 @@
--- Host: localhost
--- Generation Time: Oct 07, 2014 at 11:05 AM
--- Server version: 5.5.34
--- PHP Version: 5.4.22
+-- Host: us-cdbr-iron-east-03.cleardb.net
+-- Generation Time: Mar 31, 2017 at 9:00 PM
 
-DROP DATABASE IF EXISTS `paramedic_application_db`;
-CREATE database `paramedic_application_db`;
-USE `paramedic_application_db`;
+-- DROP DATABASE IF EXISTS `paramedic_application_db`;
+-- CREATE database `paramedic_application_db`;
+ USE `ad_419fe52b976709d`;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -24,6 +22,13 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `user_login`
 --
+
+DROP TABLE IF EXISTS `question_types`;
+DROP TABLE IF EXISTS `answers`;
+DROP TABLE IF EXISTS `questions`;
+DROP TABLE IF EXISTS `results`;
+DROP TABLE IF EXISTS `categories`;
+
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
@@ -41,7 +46,7 @@ CREATE TABLE `users` (
 -- Populate users
 --
 
-INSERT INTO `users` (`user_id`, `user_email`, `last_log_in`, `log_in_count`, `user_first_name`, `user_last_name`) VALUES (1, 'benjaminvanarragon@gmail.com', '2013-08-05 18:19:03', 1, 'Benjamin', 'Vanarragon');
+-- INSERT INTO `users` (`user_id`, `user_email`, `last_log_in`, `log_in_count`, `user_first_name`, `user_last_name`) VALUES (1, 'benjaminvanarragon@gmail.com', '2013-08-05 18:19:03', 1, 'Benjamin', 'Vanarragon');
 
 --
 -- Table structure for table `categories`
@@ -86,7 +91,7 @@ CREATE TABLE `results` (
 -- Populate results
 -- 
  
-INSERT INTO `results` (`result_id`, `result_score`, `user_id`, `category_id`, `total_length`, `date_written`) VALUES (1, 75, 1, 2, 100, '2013-08-05 18:28:52');
+-- INSERT INTO `results` (`result_id`, `result_score`, `user_id`, `category_id`, `total_length`, `date_written`) VALUES (1, 75, 1, 2, 100, '2013-08-05 18:28:52');
 
 --
 -- Table structure for table `questions`
@@ -125,9 +130,23 @@ INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_
 */
 -- ===============================
 
-INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (13, 2, 'Drugs choose one: Question 1', 1);
-INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (14, 2, 'Drugs choose one: Question 2', 1);
-INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (15, 2, 'Drugs choose one: Question 3', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (13, 2, 'What is the dosage for Atropine in Unstable Bradycardia?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (14, 2, 'What is the dosage for Calcium Chloride?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (15, 2, 'Indication for use of Dopamine?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (16, 2, 'What is the dosage of Tetracaine?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (17, 2, 'Indication for use of Atrovent?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (18, 2, 'What is the dosage for Lidocaine?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (19, 2, 'MagSulfate contraindications?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (20, 2, 'Labetaol contrindications?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (21, 2, 'What is the dosage for Versed?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (22, 2, 'What is the dosage of Solu-Medrol?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (23, 2, 'What is the dosage for Vasopressin?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (24, 2, 'What is the dosage for Epi 1:1000 for an allergic reaction?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (25, 2, 'Vasopressin indications?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (26, 2, 'Indication for use of Versed?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (27, 2, 'What is the dosage for Zofran?', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (28, 2, 'Indications for Amiodarone?', 1);
+
 /*
 INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (16, 2, 'Drugs choose multi: Question 1', 2);
 INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (17, 2, 'Drugs choose multi: Question 2', 2);
@@ -143,9 +162,9 @@ INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_
 */
 -- ===============================
 
-INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (25, 3, 'Electrocardiogram choose one: Question 1', 1);
-INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (26, 3, 'Electrocardiogram choose one: Question 2', 1);
-INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (27, 3, 'Electrocardiogram choose one: Question 3', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (29, 3, 'Electrocardiogram choose one: Question 1', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (30, 3, 'Electrocardiogram choose one: Question 2', 1);
+INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (31, 3, 'Electrocardiogram choose one: Question 3', 1);
 /*
 INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (28, 3, 'Electrocardiogram choose multi: Question 1', 2);
 INSERT INTO `questions` (`question_id`,`category_id`,`question_text`, `question_type_id`) VALUES (29, 3, 'Electrocardiogram choose multi: Question 2', 2);
@@ -256,23 +275,100 @@ INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`) VA
 -- DRUGS ANSWERS FOR ALL TYPES
 -- =============================================
 -- question 13 answers - choose one
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (49, 13, 0, 'A: DRUGS not correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (50, 13, 0, 'B: DRUGS not correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (51, 13, 1, 'C: DRUGS correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (52, 13, 0, 'D: DRUGS not correct',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (49, 13, 1, '0.5-1 mg every 3-5 minutes up to a total of 0.04 mg/kg',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (50, 13, 0, '2 mg every 5 minutes',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (51, 13, 0, '2-5 mg over 2 minutes,may repeat after 2 minutes to a max dose of 10mg',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (52, 13, 0, '5-10 mg every 3-5 minutes up to a total of 0.04 mg/kg',2);
 
 -- question 14 answers- choose one
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (53, 14, 1, 'A: DRUGS correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (54, 14, 0, 'B: DRUGS not correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (55, 14, 0, 'C: DRUGS not correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (56, 14, 0, 'D: DRUGS not correct',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (53, 14, 0, '1 gm of 5% for V-Fib/V-Tach, 500 mg for Calcium Channel Blocker overdose',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (54, 14, 1, '1 gm of 10% for V-Fib/V-Tach, 500 mg for Calcium Channel Blocker overdose',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (55, 14, 0, '2-5 mg over 2 minutes,may repeat after 2 minutes to a max dose of 10mg',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (56, 14, 0, '10 gm of 10% for V-Fib/V-Tach, 500 mg for Calcium Channel Blocker overdose',2);
 
 -- question 15 answers- choose one
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (57, 15, 0, 'A: DRUGS not correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (58, 15, 0, 'B: DRUGS not correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (59, 15, 0, 'C: DRUGS not correct',2);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (60, 15, 1, 'D: DRUGS correct',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (57, 15, 0, 'Asthma,COPD,CHF',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (58, 15, 0, 'Hypertension',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (59, 15, 1, 'Hypotension',2);
+INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (60, 15, 0, 'Type II Diabetes',2);
 
+-- question 16 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (16, 0, '1-2 drops every 5 minutes.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (16, 1, '1-2 drops initally.Repeat as needed for pain.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (16, 0, '2-4 drops every 5 minutes.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (16, 0, '2-4 drops initally.Repeat as needed for pain.',2);
+
+-- question 17 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (17, 0, 'Anti-seizure medication.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (17, 1, 'COPD, Asthma, Chronic Bronchitis, Empyshema, Coughing, Wheezing, SOB',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (17, 0, 'Tricyclic overdose',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (17, 0, 'Type II Diabetes',2);
+
+-- question 18 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (18, 1, '1 mg/Kg increasing by 0.5mg/Kg untill max dose of 3 mg. Then maintenance drip 1 level higher using clock method.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (18, 0, '150 mg with a pulse. 300 mg with no pulse.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (18, 0, 'increasing scale of 15,30,60,120,240,240',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (18, 0, 'Inital bolus of 25-50 mEq followed by infusion of 100mEq in 1000 cc bag at 150ml/hr (15dpm)',2);
+
+-- question 19 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (19, 1, 'Myocardial damage,hepatitis,heart blocks,Significant Renal Impairment,Addison Disease',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (19, 0, 'Pregnancy',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (19, 0, 'Systolic B.P. <100 with uncontrolled bleeding',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (19, 0, 'Type II Diabetes requires Med Control',2);
+
+-- question 20 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (20, 1, 'CHF,Pulmonary edema,Bradycardia,AV Block,Cardiogenic shock,Reactive Airway Disease',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (20, 0, 'Systolic blood pressure >100',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (20, 0, 'Type II Diabetes',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (20, 0, 'Unknown orgin of abdominal pain',2);
+
+-- question 21 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (21, 1, '1-2 mg over 2 minutes,may repeat after 2 minutes to a max dose of 10mg',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (21, 0, '1-2 mg over 2 minutes,may repeat after 2 minutes to a max dose of 20mg',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (21, 0, '2-5 mg over 2 minutes,may repeat after 2 minutes to a max dose of 10mg',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (21, 0, '2-5 mg over 2 minutes,may repeat after 20 minutes to a max dose of 10mg',2);
+
+-- question 22 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (22, 0, '100mEq',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (22, 1, '125mg',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (22, 0, '150mg if pulse present. 300mg if no pulse',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (22, 0, 'Inital bolus of 25-50 mEq followed by infusion of 100mEq in 1000 cc bag at 150ml/hr (15dpm)',2);
+
+-- question 23 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (23, 0, '10-20 units in a 100 cc bag',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (23, 0, '10-20 units in a single dose.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (23, 0, '20-40 units in a 100 cc bag',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (23, 1, '20-40 units in a single dose.',2);
+
+-- question 24 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (24, 0, '0.3 mg IM if hypotensive',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (24, 1, '0.3 mg IM if not hypotensive',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (24, 0, '0.3 mg IV if not hypotensive',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (24, 0, '2-5 mg over 2 minutes,may repeat after 2 minutes to a max dose of 10mg',2);
+
+-- question 25 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (25, 0, 'Asystole and PEA only',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (25, 1, 'Asystole,PEA,V-Tach,and V-fib',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (25, 0, 'Svt',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (25, 0, 'V-tach only',2);
+
+-- question 26 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (26, 0, 'Pain management',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (26, 1, 'Seizures or prior to conscious E.T. intubation',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (26, 0, 'Systolic B.P. <100',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (26, 0, 'Type II Diabetes',2);
+
+-- question 27 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (27, 1, '2-4 mg IV over 2-5 minutes or 4 mg by mouth.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (27, 0, '2-4 mg IV over 2-5 minutes or 8 mg by mouth.',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (27, 0, '2-4 mg IV over 2-5 minutes or 40 mg in a 100 cc bag wide open',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (27, 0, '4-8mg mg IV over 2-5 minutes or 4 mg by mouth.',2);
+
+-- question 28 answers- choose one
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (28, 0, 'Asthma,COPD,CHF',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (28, 1, 'Cardiac Arrest,Anti-arrhythmic used for V-tach,V-Fib,A-Fib,A-Flutter refractory to other meds',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (28, 0, 'Seizures (regular or pregnancy related)',2);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (28, 0, 'Type II Diabetes',2);
 -- =========================================
 
 
@@ -344,25 +440,24 @@ INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`) VA
 -- ECG ANSWERS FOR ALL TYPES
 -- =============================================
 -- question 25 answers - choose one
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (97, 25, 0, 'A: ECG not correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (98, 25, 0, 'B: ECG not correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (99, 25, 1, 'C: ECG correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (100, 25, 0, 'D: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 29, 0, 'A: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 29, 0, 'B: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 29, 1, 'C: ECG correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 29, 0, 'D: ECG not correct',3);
 
 -- question 26 answers- choose one
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (101, 26, 1, 'A: ECG correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (102, 26, 0, 'B: ECG not correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (103, 26, 0, 'C: ECG not correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (104, 26, 0, 'D: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 30, 1, 'A: ECG correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 30, 0, 'B: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 30, 0, 'C: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES ( 30, 0, 'D: ECG not correct',3);
 
 -- question 27 answers- choose one
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (105, 27, 0, 'A: ECG not correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (106, 27, 0, 'B: ECG not correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (107, 27, 0, 'C: ECG not correct',3);
-INSERT INTO `answers` (`answer_id`,`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (108, 27, 1, 'D: ECG correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (31, 0, 'A: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (31, 0, 'B: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (31, 0, 'C: ECG not correct',3);
+INSERT INTO `answers` (`question_id`, `isCorrect`, `answer_text`, `category_id`) VALUES (31, 1, 'D: ECG correct',3);
 
 -- =========================================
-
 
 --
 -- Table structure for table `question_types`
@@ -384,73 +479,17 @@ INSERT INTO `question_types` (`question_type_id`,`question_type`) VALUES (2, 'ch
 INSERT INTO `question_types` (`question_type_id`,`question_type`) VALUES (3, 'type_one');
 INSERT INTO `question_types` (`question_type_id`,`question_type`) VALUES (4, 'type_multi');
 
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
 
 -- ===================================================
 -- SQL PLAYGROUND QUERIES HERE
 -- ===================================================
 
-SELECT * FROM USERS;
-
-SELECT * FROM CATEGORIES;
-
-SELECT * FROM RESULTS;
-
-SELECT * FROM QUESTIONS;
-
-SELECT * FROM ANSWERS;
-
-SELECT * FROM QUESTION_TYPES;
-
--- gets user name and test score
-SELECT 
-CONCAT(result_score, '/', total_length) AS 'Score', 
-CONCAT(user_first_name, ' ', user_last_name) AS 'Name' 
-FROM RESULTS 
-INNER JOIN USERS 
-ON results.user_id = users.user_id;
-
-SELECT * FROM QUESTIONS WHERE category_id = 1;
-SELECT * FROM ANSWERS WHERE category_id = 1;
-
-SELECT * FROM QUESTIONS WHERE category_id =1;
-
--- this function selects random top number in the limit function
-SELECT * FROM QUESTIONS WHERE category_id = 1
-ORDER BY RAND()
-LIMIT 2;
-
-INSERT INTO questions (question_id, category_id, question_text, question_type_id)
-VALUES (99, 1, "colons", 1);
 
 
-INSERT INTO answers VALUES (109, 99, 1, "yes", 1);
-INSERT INTO answers VALUES (110, 99, 0, "only once a week", 1);
-INSERT INTO answers VALUES (111, 99, 0, "sometimes", 1);
-INSERT INTO answers VALUES (112, 99, 0, "no", 1);
-INSERT INTO answers VALUES (113, 99, 0, "maybe", 1);
-
-
--- INSERT INTO users VALUES (2, "aragallex@gmail.com", '2013-08-05 18:19:03', 2, 'Ben', 'v');
-SELECT * FROM users;
-
--- UPDATE users SET last_log_in = '2016-08-05 18:19:03', log_in_count = 6 WHERE user_email = 'aragallex@gmail.com';
-
-INSERT INTO results VALUES (6, 99, 11, 1, 100, '2014-08-05 18:28:52');
-select * from results WHERE category_id = 1 ORDER BY result_id DESC;
-
-and user_id = 11;
-
-
-
-
-
-
+SELECT * FROM QUESTIONS WHERE category_id = 2;
 
 
 
