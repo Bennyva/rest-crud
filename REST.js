@@ -4,12 +4,19 @@ function REST_ROUTER(router,connection,md5) {
     self.handleRoutes(router,connection,md5);
 }
 
+
+
 REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 	    router.get("/",function(req,res){
-	        res.json({"Message" : "Hello World sss!"});
+	       // res.sendfile("login.html" );
 	    })
 	}
+
+
+
+
+
     /*router.post("/users",function(req,res){
         var query = "INSERT INTO ??(??,??) VALUES (?,?)";
         var table = ["user_login","user_email","user_password",req.body.email,md5(req.body.password)];
@@ -151,16 +158,17 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
             if(err) {
                 res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
             } else {
-            	console.log(req.body);
-                res.json({"Error" : false, "Message" : "Question Added !", "New Question " : rows});
+            	console.log(res.body);
+                res.json({"Error" : false, "Message" : "Question Added !", "New Question " : rows.insertId});
             }
         });
     });
 
-	router.post("/process_questions",function(req,res){
-	        res.render('loginSent.html', {name: req.body.questionID});
-	        console.log("wow");
-	    });
+    router.post("/process_questions",function(req,res){
+            res.render('loginSent.html', {name: req.body.questionID});
+            console.log("wow");
+        });
+
 
 
     router.get("/users",function(req,res){
@@ -185,7 +193,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
                 res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
             } else {
                 console.log(req.body);
-                res.json({"Error" : false, "Message" : "User Added !", "New User " : rows});
+                res.json({"Error" : false, "Message" : "User Added !", "New User " : rows.question_id});
             }
         });
     });
@@ -232,6 +240,10 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         });
     });
 
+
+    
+
+//add per user id next
     router.get("/results/:category_id/:user_id",function(req,res){
         var query = "SELECT * FROM ?? WHERE ??=? AND ??=? ORDER BY ?? DESC";
         var table = ["results","category_id",req.params.category_id, "user_id",req.params.user_id, "result_id"];
@@ -245,7 +257,162 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         });
     });
 
-//add per user id next
+    //transaction with multiple inserts for admin panel
+
+    router.post("/questions/addWA",function(req,res){
+        if(req.body.categoryID === null){
+                res.render('error.html');
+        }else{
+        
+            connection.beginTransaction(function(err) {
+              if (err) { throw err; }
+              var query = "INSERT INTO ??(??,??,??) VALUES (?,?,?)";
+              var table = ["questions","category_id", "question_text", "question_type_id" ,req.body.categoryID, req.body.questionText, req.body.questionTypeID];
+              query = mysql.format(query,table);
+             
+              connection.query(query,function(err,rows){
+                if (err) { 
+                connection.rollback(function() {
+                    res.json({"Error" : true + err, "Error: ->" : "executing insert MySQL query"});
+                    console.log("Error" + err);
+                    throw err;
+                  });
+                } else {
+                    console.log("Success on Question :" + req.body);
+                    //res.json({"Success: " : "Question Added !"});
+                    res.render('loginSent.html');
+                    var questionID = rows.insertId;
+                } 
+
+               // var log = 'Question ' + rows.question_id + ' added';
+                
+
+                var query = "INSERT INTO ??(??,??,??,??) VALUES (?,?,?,?)";
+                var table = ["answers","question_id", "isCorrect", "answer_text", "category_id" ,questionID, req.body.isCorrect, req.body.answerText, req.body.categoryID];
+                query = mysql.format(query,table);
+
+                connection.query(query,function(err, rows) {
+                  if (err) { 
+                    connection.rollback(function() {
+                      //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                      throw err;
+                    });
+                  }  
+                  connection.commit(function(err) {
+                    if (err) { 
+                      connection.rollback(function() {
+                        //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                        throw err;
+                      });
+                    } else{
+                        console.log(req.body);
+                        //res.json({"Error" : false, "Message" : "Question Added !", "New Question " : rows});
+                        console.log('success!');
+                    }
+                    
+                  });
+                });
+
+                // ============
+                //ANSWER TWO
+                //===========
+                var query = "INSERT INTO ??(??,??,??,??) VALUES (?,?,?,?)";
+                var table = ["answers","question_id", "isCorrect", "answer_text", "category_id" ,questionID, req.body.isCorrect2, req.body.answerText2, req.body.categoryID];
+                query = mysql.format(query,table);
+
+                connection.query(query,function(err, rows) {
+                  if (err) { 
+                    connection.rollback(function() {
+                      //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                      throw err;
+                    });
+                  }  
+                  connection.commit(function(err) {
+                    if (err) { 
+                      connection.rollback(function() {
+                        //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                        throw err;
+                      });
+                    } else{
+                        console.log(req.body);
+                        //res.json({"Error" : false, "Message" : "Question Added !", "New Question " : rows});
+                        console.log('success!');
+                    }
+                    
+                  });
+                });
+
+                // ============
+                //ANSWER THREE
+                //===========
+                var query = "INSERT INTO ??(??,??,??,??) VALUES (?,?,?,?)";
+                var table = ["answers","question_id", "isCorrect", "answer_text", "category_id" ,questionID, req.body.isCorrect3, req.body.answerText3, req.body.categoryID];
+                query = mysql.format(query,table);
+
+                connection.query(query,function(err, rows) {
+                  if (err) { 
+                    connection.rollback(function() {
+                      //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                      throw err;
+                    });
+                  }  
+                  connection.commit(function(err) {
+                    if (err) { 
+                      connection.rollback(function() {
+                        //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                        throw err;
+                      });
+                    } else{
+                        console.log(req.body);
+                        //res.json({"Error" : false, "Message" : "Question Added !", "New Question " : rows});
+                        console.log('success!');
+                    }
+                    
+                  });
+                });
+
+
+                // ============
+                //ANSWER FOUR
+                //===========
+                var query = "INSERT INTO ??(??,??,??,??) VALUES (?,?,?,?)";
+                var table = ["answers","question_id", "isCorrect", "answer_text", "category_id" ,questionID, req.body.isCorrect4, req.body.answerText4, req.body.categoryID];
+                query = mysql.format(query,table);
+
+
+                connection.query(query,function(err, rows) {
+                  if (err) { 
+                    connection.rollback(function() {
+                      //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                      throw err;
+                    });
+                  }  
+                  connection.commit(function(err) {
+                    if (err) { 
+                      connection.rollback(function() {
+                        //res.json({"Error" : true + err, "Message" : "Error executing insert MySQL query"});
+                        throw err;
+                      });
+                    } else{
+                        console.log(req.body);
+                        //res.json({"Error" : false, "Message" : "Question Added !", "New Question " : rows});
+                        console.log('success!');
+                    }
+                    
+                  });
+                });
+              });
+            });  
+        }
+    });
+
+        
+    
+
+    
+
+
+
 	
 }
 

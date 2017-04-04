@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Panel</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+   <body>
+      <!-- https://vanarragon-paramedic.mybluemix.net/api/questions/add -->
+      <div class="container">
+        <h1>Admin Panel</h1>
+        <p>Adding Questions with Answers to DB</p>  
+      </div>
+      <div class="container">
+         <form action = "/api/questions/addWA" method = "POST">
+            <div class="row">
+               <div class="col-sm-9 col-sm-offset-1">
+                  
+                     <fieldset class="form-group">
+                        <div class="form-group">
+                           <label for="categoryID">Category ID (numbers only)</label>
+                           <input class="form-control" type="text" id="categoryID" name="categoryID" placeholder="Enter the Category ID" required pattern="^[0-9]*$"/>
+                        </div>
+                        <div class="form-group">
+                           <label for="questionText">Question Text</label>
+                           <input  class="form-control" type="text" id="questionText" name="questionText" placeholder="Enter your questions text" required/>
+                        </div>
+
+                        <div class="form-group">
+                         <label for="questionTypeID">Question Type ID</label>
+                            <select class="form-control" id="questionTypeID" name="questionTypeID">
+                              <option value="1">1</option>
+                            </select>
+                        </div>
+                     </fieldset>
+               </div>
+            </div>
+            <!-- ANSWER - 1 -->
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-1">
+                  <div class="form-group">
+                     <label for="isCorrect">Is Correct</label>
+                     <select class="form-control" id="isCorrect" name="isCorrect">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-sm-4 col-sm-offset-1"> 
+                  <div class="form-group">    
+                     <label for="answerText">Answer Text</label>
+                     <input class="form-control" id="answerText" name="answerText" placeholder="Enter the answers text" required></input>
+                  </div>
+               </div>
+            </div>
+
+            <!-- ANSWER - 2 -->
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-1">
+                  <div class="form-group">
+                     <label for="isCorrect2">Is Correct</label>
+                     <select class="form-control" id="isCorrect2" name="isCorrect2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-sm-4 col-sm-offset-1"> 
+                  <div class="form-group">    
+                     <label for="answerText2">Answer Text</label>
+                     <input class="form-control" id="answerText2" name="answerText2" placeholder="Enter the answers text" required></input>
+                  </div>
+               </div>
+            </div>
+
+            <!-- ANSWER - 3 -->
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-1">
+                  <div class="form-group">
+                     <label for="isCorrect3">Is Correct</label>
+                     <select class="form-control" id="isCorrect3" name="isCorrect3">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-sm-4 col-sm-offset-1"> 
+                  <div class="form-group">    
+                     <label for="answerText3">Answer Text</label>
+                     <input class="form-control" id="answerText3" name="answerText3" placeholder="Enter the answers text" required></input>
+                  </div>
+               </div>
+            </div>
+
+            <!-- ANSWER - 4 -->
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-1">
+                  <div class="form-group">
+                     <label for="isCorrect4">Is Correct</label>
+                     <select class="form-control" id="isCorrect4" name="isCorrect4">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-sm-4 col-sm-offset-1"> 
+                  <div class="form-group">    
+                     <label for="answerText4">Answer Text</label>
+                     <input class="form-control" id="answerText4" name="answerText4" placeholder="Enter the answers text" required></input>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-8 col-sm-offset-5">      
+                  <button type="submit" class="btn btn-primary">Submit</button>
+               </div>
+            </div>     
+         </form>
+      </div>
+   </body>
+</html>

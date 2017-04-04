@@ -17,9 +17,13 @@ var rest = require("./REST.js");
 var app  = express();
 
 app.set('port', process.env.PORT || 3000);
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'rest-crud')));
+
+app.use(express.static(path.join(__dirname, 'views')));
 
 
 function REST(){
@@ -30,13 +34,20 @@ function REST(){
 REST.prototype.connectMysql = function() {
     var self = this;
     var pool      =    mysql.createPool({
-        connectionLimit : 4,
-        host     : 'us-cdbr-iron-east-03.cleardb.net',
-        user     : 'babb6506ac0300',
-        password : '43e78c2c',
-        database : 'ad_419fe52b976709d',
+        connectionLimit : 100,
+        host     : 'localhost',
+        user     : 'root',
+        password : 'password',
+        database : 'paramedic_application_db',
         debug    :  false
     });
+
+/*        host     : 'us-cdbr-iron-east-03.cleardb.net',
+        user     : 'babb6506ac0300',
+        password : '43e78c2c',
+        database : 'ad_419fe52b976709d',*/
+
+
     pool.getConnection(function(err,connection){
         if(err) {
           self.stop(err);
@@ -53,8 +64,11 @@ REST.prototype.configureExpress = function(connection) {
       app.use(bodyParser.json());
       app.use(morgan('common'));
       var router = express.Router();
+
       app.use('/api', router);
+
       var rest_router = new rest(router,connection,md5);
+
       self.startServer();
 }
 
@@ -73,9 +87,9 @@ new REST();
 
 
 
-  app.get('/', function (req, res) {
-     res.sendfile("login.html" );
-  });
+   app.get('/',function(req, res){  
+      res.render('login');
+    });
 
   app.get('/newQuestion', function (req, res) {
      res.sendfile("loginSent.html" );
